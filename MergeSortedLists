@@ -1,0 +1,42 @@
+package linkedList;
+/**
+ * 合并两个递增序列的单链表
+ * @author 赵文奎
+ *
+ */
+public class MergeSortedLists {
+
+	//递归方法实现
+	public ListNode Merge(ListNode list1,ListNode list2){
+		//如果链表1为空，则返回链表2
+		if(list1 == null)
+			return list2;
+		//如果链表2为空，则返回链表1
+		if(list2 == null)
+			return list1;
+		//如果链表1和链表2都为空，则返回空链表
+		if(list1 == null && list2 == null)
+			return null;
+		ListNode mergeListHead = null;
+		//如果链表1的值小于链表2的值，则将链表1的值存入新的链表中
+		if(list1.val < list2.val){
+			mergeListHead = list1;
+			mergeListHead.next = Merge(list1.next,list2);
+		}else{
+			mergeListHead = list2;
+			mergeListHead.next = Merge(list1,list2.next);
+		}
+		
+		return mergeListHead;
+	}
+}
+
+class ListNode {
+	int val;
+	ListNode next = null;
+	
+	public ListNode(int val){
+		this.val = val;
+	}
+}
+
